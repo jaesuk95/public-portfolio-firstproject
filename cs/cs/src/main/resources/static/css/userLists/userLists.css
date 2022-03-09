@@ -1,0 +1,87 @@
+ main {}
+
+    .historyView a{
+                text-decoration: none;
+                color: black;
+    }
+
+        .historyView a:hover{
+
+                    color: blue;
+        }
+
+    .historyProfile {
+        /* margin-left: 50%;
+        margin-right: 50%; */
+
+        margin: 50px auto 30px ;
+        width: 960px;
+        height: 80px;
+        box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+        border-radius: 10px;
+        color: white;
+        background-color: rgba(0,0,0,0.9);
+    }
+
+    .historyProfile p {
+        text-align: center;
+        line-height: 80px;
+        vertical-align: middle;
+        font-size: 25px;
+        font-weight: 300;
+    }
+
+
+
+
+
+    .historyView {
+
+        width: 960px;
+        min-height: 130px;
+        /*      min height for each history view       */
+        box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        margin: 10px auto;
+    }
+
+
+    .history-view {
+        display: flex;
+    }
+
+    .history-view-image {
+        width: 52px;
+
+    }
+
+    .profile-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        object-fit: cover;
+    }
+
+    .history-view-name {
+        padding-left: 30px;
+        font-size: 25px;
+        /* font-weight: 400; */
+    }
+
+    .history-view-email {
+        padding-left: 20px;
+        font-size: 22px;
+        font-weight: 300;
+        color: gray;
+    }
+
+    .history-view-bio {
+        position: absolute;
+        margin-top: 40px;
+        margin-left: 80px;
+        width: 830px;
+        height: 45px;
+        overflow: hidden;
+    }

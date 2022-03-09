@@ -1,0 +1,27 @@
+    * {box-sizing: border-box;}
+
+    .marketObject{
+        padding-top: 45px;
+        text-align: center;
+
+    }
+
+    .userInsertBox2{
+        padding-top: 20px;
+    }
+
+    button{
+        width: 100px;
+        padding: 1px 10px;
+        border-radius: 3px;
+        border: none;
+        outline: none;
+        /* background: linear-gradient(to right, #000000, #434343); */
+        background: #434343;
+        color: white;
+    }
+
+    button:hover{
+        background-color: #000000;
+        transition: 0.5s;
+    }

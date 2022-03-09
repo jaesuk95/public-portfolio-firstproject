@@ -1,0 +1,87 @@
+<header th:fragment="navbar">
+
+    <div class="nav--bar">
+        <ul class="outerul">
+
+            <li class="mob"><a href="/home/index.html" th:href="@{/}">Home</a></li>
+
+            <li class="nav-item"  sec:authorize="!isAuthenticated()">
+                <a class="nav--link" href="/login" th:href="@{/login}">Central</a>
+            </li>
+            <li class="nav-item"  sec:authorize="isAuthenticated()">
+                <a class="nav--link" href="#" th:href="@{/central}">Central</a>
+            </li>
+
+            <li class="mob"><a href="market.html" th:href="@{/profile}">Profile</a></li>
+            <li class="mob"><a href="market.html" th:href="@{/market}">Market</a></li>
+
+            <li class="mob"><a href="portfolio.html" th:href="@{/portfolio}">Portfolio</a></li>
+
+            <li class="nav-item"  sec:authorize="!isAuthenticated()">
+                <a class="nav--link" href="/login">Log in</a>
+            </li>
+            <li class="nav-item"  sec:authorize="isAuthenticated()">
+                <a class="nav--link" href="#" th:href="@{/logout}">Log Out</a>
+            </li>
+
+
+<!--            <li class="mob">LANGUAGE <i class="fas fa-caret-down"></i>-->
+
+<!--                <div class="dropdown__menu">-->
+<!--                    <ul>-->
+<!--                        <li class="language"><a href="#"><span class="flag-icon flag-icon-us"></span>  US</a></li>-->
+<!--                        <li class="language"><a href="#"><span class="flag-icon flag-icon-gb"></span>  ENg</a></li>-->
+<!--                        <li class="language"><a href="#"><span class="flag-icon flag-icon-kr"></span>  한국어</a></li>-->
+<!--                        <li class="language"><a href="#"><span class="flag-icon flag-icon-jp"></span>  日本語</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </li>-->
+        </ul>
+    </div>
+
+
+    <container class="navsearch">
+
+        <div class="logo">
+            <a href="#" th:href="@{/}"><h1 class="logo">Central<span>Station</span></h1></a>
+        </div>
+
+        <div class="nav-item"  sec:authorize="isAuthenticated()">
+<!--            <form class="search" th:action="@{/search}" th:object="${userSearch}">-->
+            <form class="search" th:action="@{/search}">
+
+<!--                <button class="icon"></button>-->
+                <div class="search-submit-button">
+<!--                    <input type="submit" value="Submit" class="btn-search btn-search">-->
+<!--                    <input type="submit" value="Submit" class="searchButton">-->
+                    <button type="submit" value="Submit" class="searchButton"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="input">
+                    <label for="keyword" hidden>Email</label>
+                    <input type="text" placeholder="Search" id="keyword" name="keyword" />
+                </div>
+
+                <span class="clear" onclick="document.getElementById('keyword').value = ''"></span>
+            </form>
+        </div>
+
+    </container>
+
+    <container class="subnavi">
+
+        <div class="stocks">
+            <ul>
+                <li class="stockslist"><a href="#" th:href="@{/market/dowj}">Dow 30</a></li>
+                <li class="stockslist"><a href="#" th:href="@{/market/spy}">S&P 500</a></li>
+                <li class="stockslist"><a href="#" th:href="@{/market/nasdaq}">NASDAQ</a></li>
+                <li class="stockslist"><a href="#" th:href="@{/market/btcusd}">Bitcoin</a></li>
+                <li class="stockslist"><a href="#" th:href="@{/market/ethusd}">Ethereum</a></li>
+                <li class="stockslist"><a href="#" th:href="@{/market/usdkrw}">USD/KRW</a></li>
+            </ul>
+        </div>
+
+    </container>
+
+
+</header>

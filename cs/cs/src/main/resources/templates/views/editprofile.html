@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<form th:action="@{/profile/edit/{email}}" method="post">
+    <table class="table2">
+
+        <tr th:each="user:${client}">
+            <th th:text="${user.email}"></th>
+            <td><input type="hidden" class="form-control"  id="email" name="email" th:value="${user.email}"/></td>
+        </tr>
+
+        <tr th:each="user:${client}">
+            <th>bio</th>
+            <td><input type="text" class="form-control"  id="bio" name="bio" th:value="${user.bio}"/></td>
+        </tr>
+
+        <!-- INSTAGRAM RELATED -->
+
+        <tr th:each="user:${client}">
+            <th>Instagram URL : </th>
+            <td><input type="text" class="form-control"  id="instagram" name="instagram" th:value="${user.instagram}"/></td>
+        </tr>
+
+        <tr th:each="user:${client}">
+            <th>Instagram tag</th>
+            <td><input type="text" class="form-control"  id="ig_tag" name="instagramTag" th:value="${user.ig_tag}"/></td>
+        </tr>
+
+        <!-- Twitter RELATED -->
+
+        <tr th:each="user:${client}">
+            <th>Twitter URL : </th>
+            <td><input type="text" class="form-control"  id="twitter" name="twitter" th:value="${user.twitter}"/></td>
+        </tr>
+
+        <tr th:each="user:${client}">
+            <th>Twitter tag : </th>
+            <td><input type="text" class="form-control"  id="tw_tag" name="twitterTag" th:value="${user.tw_tag}"/></td>
+        </tr>
+
+        <!-- Telegram RELATED -->
+
+<!--        <tr th:each="user:${client}">-->
+<!--            <th>Telegram URL : </th>-->
+<!--            <td><input type="text" class="form-control"  id="telegram" name="telegram" th:value="${user.telegram}"/></td>-->
+<!--        </tr>-->
+
+        <tr th:each="user:${client}">
+            <th>Telegram tag : </th>
+            <td><input type="text" class="form-control"  id="tg_tag" name="telegramTag" th:value="${user.tg_tag}"/></td>
+        </tr>
+
+    </table>
+    <input type="submit" value="Submit!"/>
+</form>
+
+</body>
+</html>

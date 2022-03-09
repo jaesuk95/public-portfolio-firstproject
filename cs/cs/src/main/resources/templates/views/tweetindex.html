@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+Welcome <span sec:authentication="principal.username"> User</span><br>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Tweet</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="feed:${tweets}">
+<!--        <td th:text="${feed.tweet}"></td>-->
+        <td><a  th:href="@{/tweet/{id}(id=${feed.id})}" th:text="${feed.tweet}"></a></td>
+        <td th:text="${feed.date}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a type="button" th:href="@{/form}">Write</a>
+
+
+<br><br><br><br><br>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>bio</th>
+        <th>instagram</th>
+        <th>twitter</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="user:${profile}">
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.bio}"></td>
+        <td th:text="${user.instagram}"></td>
+        <td th:text="${user.twitter}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

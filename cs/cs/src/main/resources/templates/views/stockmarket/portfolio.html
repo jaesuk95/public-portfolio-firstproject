@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <!-- for navbar icons and etc -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/css/flag-icons.min.css" integrity="sha512-UwbBNAFoECXUPeDhlKR3zzWU3j8ddKIQQsDOsKhXQGdiB5i3IHEXr9kXx82+gaHigbNKbTDp3VY/G6gZqva6ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- for js chart size -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"
+            integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+
+    <title>Title</title>
+
+    <link href="navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet">
+<!--    <script src="/js/portfolio.js" th:href="@{/js/portfolio.js}"></script>-->
+
+
+
+</head>
+
+
+<style>
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Create two unequal columns that floats next to each other */
+    .column {
+      float: left;
+      padding: 10px;
+      margin-top: 25px;
+      height: auto; /* Should be removed. Only for demonstration */
+    }
+
+
+
+    .left {
+      width: 65%;
+      padding-left: 20px;
+
+    }
+
+    .stocktable{
+      width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .stocktable .tablehead{
+        background-color: rgba(0,0,0,0.8);
+        padding: 2px 0px;
+        text-align: center;
+        width: 130px;
+        color: white;
+    }
+
+    .tablelist{
+      background-color: rgba(0,0,0,0.5);
+        text-align: center;
+        width: 130px;
+        color: white;
+        font-weight: 300;
+    }
+
+    .right {
+      width: 35%;
+      padding-right: 25px;
+    }
+
+    .col-md-10{
+      padding-left: 100px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .editButton button{
+        background-color: rgba(0,0,0,0.8);
+        border: 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        color: white;
+        padding: 10px 25px;
+    }
+
+    .modal-container2{
+        background-color: rgba(0,0,0,0.5);
+        display: flex;
+        margin-top: -60px;
+        margin-left: -8px;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .modal-container2.show {
+        pointer-events: auto;
+        opacity: 1;
+    }
+
+
+    .modal2{
+        background-color: white;
+        width: 800px;
+
+        max-width: 100%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        padding: 30px 50px;
+        text-align: center;
+    }
+
+    .portfolioform{
+        padding-top: 50px;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .portfolioform td{
+        padding: 10px 0px;
+        width: 50%;
+        margin: 10px auto;
+    }
+
+    .portfolioform input{
+        width: 300px;
+    }
+
+    .formbutton{
+        margin-top: 20px;
+        width: 200px;
+    }
+
+
+
+    .modal-container3{
+        background-color: rgba(0,0,0,0.5);
+        display: flex;
+        margin-top: -60px;
+        margin-left: -8px;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .modal-container3.edition {
+        pointer-events: auto;
+        opacity: 1;
+    }
+
+    .modal3{
+        background-color: white;
+        width: 800px;
+        max-width: 100%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        padding: 30px 50px;
+        text-align: center;
+    }
+
+    .editTable{
+        align-items: center;
+    }
+
+    .editTable td{
+        width: 320px;
+        padding: 8px 20px;
+    }
+
+    .editTable td a{
+        text-decoration: none;
+    }
+
+    .total-header{
+        /* border: 2px solid red; */
+        text-align: center;
+        font-size: 25px;
+        font-weight: 300;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        border-radius: 5px;
+    }
+
+    .total-amount{
+        text-align: center;
+        font-size: 25px;
+        padding-top: 15px;
+        padding-bottom: 20px;
+    }
+
+    .currency{
+        position: absolute;
+        font-size: 25px;
+        margin-top: -50px;
+        margin-left: 570px;
+    }
+
+    </style>
+
+
+
+
+<body>
+
+<div th:replace="fragments/navbar::navbar" replace="fragments/navbar::navbar"></div>
+
+<div class="row">
+    <div class="column left" style="background-color:#aaa;">
+
+
+
+        <div class="modal-container2" id="modal_container2">
+            <div class="modal2">
+                <h3>Fill in the blank forms to personalise your portfolio</h3>
+
+                <table class="portfoliotable">
+                    <tr class="portfolioform">
+                        <td>List Name</td>
+                        <td><input name="listName"></td>
+                    </tr>
+
+                    <tr class="portfolioform">
+                        <td>Number of Shares</td>
+                        <td><input name="holding"></td>
+                    </tr>
+                    <tr class="portfolioform">
+                        <td>Average Price</td>
+                        <td><input name="AvePrice"></td>
+                    </tr>
+                </table>
+
+                <button class="formbutton" id="close">
+                    Close
+                </button>
+
+                <button class="formbutton" id="add">
+                    Add
+                </button>
+            </div>
+        </div>
+
+        <!-- edit button -->
+        <div class="modal-container3" id="modal_container3">
+            <div class="modal3">
+                <h3>Edit Portfolio</h3>
+
+                <table class="editTable">
+                    <tr>
+                        <td>List</td>
+                        <td>Number of Shares</td>
+                        <td>Average Price</td>
+                        <td>Remove</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tesla</td>
+                        <td><input name="editShare" placeholder="10"></td>
+                        <td><input name="editAverage" placeholder="450"></td>
+                        <td><a href="#">X</a></td>
+                    </tr>
+                    <tr>
+                        <td>Tesla</td>
+                        <td><input name="editShare" placeholder="10"></td>
+                        <td><input name="editAverage" placeholder="450"></td>
+                        <td><a href="#">X</a></td>
+                    </tr>
+                </table>
+
+                <button class="formbutton" id="close2">
+                    Close
+                </button>
+
+                <button class="formbutton" id="add_">
+                    Add
+                </button>
+            </div>
+        </div>
+
+        <div class="editButton">
+            <button id="open">
+                Add
+            </button>
+
+            <button id="edit">
+                Edit
+            </button>
+        </div>
+        <table class="stocktable">
+
+            <tr>
+                <td class="tablehead">List</td>
+                <td class="tablehead">No. of Shares</td>
+                <td class="tablehead">Ave. Price</td>
+                <td class="tablehead">Today's price</td>
+                <td class="tablehead">% Change</td>
+                <td class="tablehead">NetChange</td>
+                <td class="tablehead">USD/KRW</td>
+                <td class="tablehead">Total Allocation (KRW)</td>
+            </tr>
+
+            <tbody id="table1">
+                <tr th:each="pf:${portfolio}">
+                    <td class="tablelist" th:text="${pf.symbol}" id="ticker">Apple</td>
+                    <td class="tablelist" th:text="${pf.shares}" id="amount">10</i></td>
+                    <td class="tablelist" th:text="${pf.avePrice}" id="aveprice">80</td>
+                    <td class="tablelist" id="price">160</td>
+                    <td class="tablelist" id="change">100% <i class="fas fa-caret-up"></i></td>
+                    <td class="tablelist" id="netChange">800</td>
+                    <td class="tablelist">1,190</td>
+                    <td class="tablelist">1,666,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="column right" style="background-color:#bbb;">
+        <p class="total-header">TOTAL AMOUNT </p>
+        <div>
+            <p class="total-amount" id="totalAllocation">0</p>
+            <p class="currency">KRW</p>
+        </div>
+
+        <p class="total-header">NET CHANGE </p>
+        <div>
+            <p class="total-amount" id="totalNetChange">0 </p>
+            <p class="currency">USD</p>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="/js/portfoliopopup.js" th:href="@{/js/portfoliopopup.js}"></script>
+<script src="/js/portfolioCalc.js" th:href="@{/js/portfolioCalc.js}"></script>
+
+</body>
+</html>

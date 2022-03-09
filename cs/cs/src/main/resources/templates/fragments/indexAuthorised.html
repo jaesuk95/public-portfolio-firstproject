@@ -1,0 +1,71 @@
+<div th:fragment="indexxx">
+
+<div sec:authorize="isAuthenticated()">                                                                                 <!-- AUTHORISED -->
+    <div class="row">
+        <!-- profile column -->
+        <div class="column left">
+            <div class="column_left_border">
+                <div class="profileclass">
+                    <a href="#"><img class="profiletag" src="/img/mainprofilepicture.jpg"></a>
+                </div>
+
+                <div class="profileDetails" th:each="user:${profile}">
+                    <p class="profileName" th:text="${user.name}">Author name:</p>
+                    <p class="profileNationality" th:text="${user.nationality}">nationality</p>
+                    <p class="profileEmail" th:text="${user.email}">email</p>
+                    <p class="profileBio" th:text="${user.bio}">bio</p>
+
+                    <div class="icons">
+                        <!--                    <a href="#" th:href="${user.instagram}"><i class="fab fa-facebook-f"></i></a><br>-->
+                        <a href="#" th:href="${user.twitter}"><i class="fab fa-twitter"></i></a><a th:text="${user.tw_tag}">tag</a> <br>
+                        <a href="#" th:href="${user.instagram}"><i class="fab fa-instagram"></i></a><a th:text="${user.ig_tag}">tag</a> <br>
+                        <a href="https://telegram.org/"><i class="fab fa-telegram"></i></a><a th:text="${user.tg_tag}">tag</a> <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="column middle">
+            <div class="overal_feed">
+                <!--  submit section  -->
+                <div class="feedbox">
+                    <div class="">
+                        <div class="userfeed">
+                            <div class="useroption">
+                                <textarea class="textarea" rows="3" cols="63" maxlength="300" minlength="1" placeholder="Share your thoughts here"></textarea>
+                                <div class="submitform">
+                                    <button class="tags">Add Tags</button>
+                                    <input type="button" class="submitfeed" value="Upload" onclick="upload();">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedbox">
+                    <div class="">
+
+                        <div>
+                            <a href="#" class="feedtitle"><p class="feedtitlefont">Why is it a red day today?</p></a>
+                        </div>
+
+                        <div class="feedmaintag">
+                            <a href="tsla#" class="feedtag">#tsla</a>,
+                            <a href="dowj#" class="feedtag">#dowj</a>,
+                            <a href="sp#" class="feedtag">#s&p500</a>,
+                            <a href="apple#" class="feedtag">#appl</a>
+                        </div>
+
+                        <div class="feeder">
+                            <a href="viewcomment#" class="feedcomment"><i class="fas fa-comment-alt"></i> View Comment</a>
+                            <a href="viewauthor#" class="feedauthor"> Jaesuk Lee</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- row div end -->
+</div>
+</div>

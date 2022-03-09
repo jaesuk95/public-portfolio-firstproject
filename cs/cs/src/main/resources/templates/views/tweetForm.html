@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--Welcome <span sec:authentication="principal.username"> User</span><br>-->
+Welcome <span sec:authentication="principal.username"> User</span><br>
+
+<div layout:fragment="content" class="container mySpace">
+
+    <form th:action="@{/form}" th:object="${tweet}" method="post">
+        <div>
+            <label for="tweet">Write your tweets here</label>
+            <input id="tweet" type="text" th:field="*{tweet}" class="form-control"
+                   placeholder="Share your thoughts here"/>
+        </div>
+        <input type="submit" value="Submit"/>
+    </form>
+
+</div>
+
+</body>
+</html>

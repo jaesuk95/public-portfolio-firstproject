@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Tweet</th>
+        <th>Date</th>
+        <th>id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comment:${comments}">
+        <td th:text="${comment.tweet}"></td>
+        <td th:text="${comment.date}"></td>
+        <td th:text="${comment.id}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<div layout:fragment="content" class="container mySpace">
+    <form th:action="@{/tweet/reply}" th:object="${reply}" method="post">
+        <div>
+            <label for="content">Write your tweets here</label>
+            <input id="content" type="text" th:field="*{content}" class="form-control" placeholder="Comment here"/>
+
+            <input id="id" type="text" th:field="${comments.id}" class="form-control" placeholder="Comment here"/>
+
+        </div>
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+
+<br><br><br><br><br><br><br>
+
+<table class="table table-hover">
+
+    <tr th:each="responseMessage:${response.replies}">
+        <th>content : </th>
+        <td th:text="${responseMessage.content}"></td>
+        <td th:text="${responseMessage.createDate}"></td>
+        <!--        <td th:text="${responseMessage.user_email}"></td>-->        <!-- 현재 이메일이 왜 출력이 안되는지 이해 불가 -->
+    </tr>
+
+</table>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

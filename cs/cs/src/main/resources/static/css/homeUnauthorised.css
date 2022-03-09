@@ -1,0 +1,46 @@
+*{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+      }
+
+
+    /* -------------------------------body----------------------------------- */
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+        .backgroundimg{
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .info{
+            height: 500px;
+        }
+
+        .unathorisedAlert{
+            position: relative;
+            width: 700px;
+            height: 300px;
+            top: -900px;
+            margin: auto;
+            background-color: rgb(200, 199, 199);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgb(0, 0, 0, 0.8);
+        }
+
+        .alertMessage{
+            text-align: center;
+            font-size: 25px;
+            font-weight: 300;
+            padding-top: 100px;
+            line-height: 0.8;
+
+        }

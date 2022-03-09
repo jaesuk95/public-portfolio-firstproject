@@ -1,0 +1,264 @@
+*{margin: 0;
+    padding: 0;
+    box-sizing: border-box;}
+
+    ol, ul{
+        padding-left: 0%;
+    }
+
+  body{
+      background: white;
+      user-select: none;
+      overflow-x: hidden;           /* x-direction overflow hidden */
+  }
+
+  .nav--bar{
+      position: fixed;
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(to right, #000000, #434343);
+      z-index: 50;
+  }
+
+  .nav--bar ul{
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+  }
+
+  .nav--bar ul li {
+      color: white;
+      float: left;
+      width: 133px;
+      line-height: 60px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.3s;
+      position: relative;
+      font-size: 18px;
+      font-weight: 300;
+  }
+
+  .nav--bar ul li a{
+      display: block;         /* click function */
+      color: white;
+      text-decoration: none;
+  }
+
+    .dropdown__menu{
+      display: none;
+    }
+
+    .nav--bar ul li:hover .dropdown__menu{
+        display: block;
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        top: 100%;
+        background-color: rgba(0,0,0,0.8);
+        opacity: 1;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0%;
+    }
+
+  .dropdown__menu ul{
+  display: block;
+  }
+
+  .dropdown__menu ul li {
+      width: 100%;
+  }
+
+
+  ul li a{
+      color: white;
+      text-decoration: none;
+  }
+
+  ul li:hover:not(.active){
+      background: rgba(0,0,0,0.8);
+  }
+
+
+
+
+
+
+
+
+
+
+  .navsearch{
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px 1%;
+  }
+
+  .search {
+      position: fixed;
+      right: 1%;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 10px;
+      transition: 0.5s;
+      box-shadow: 0 0 0 3px white;
+      overflow: hidden;
+      z-index: 200;
+      width: 270px;
+      overflow: hidden;
+      margin-top: -20px;
+      display: flex;
+  }
+
+  .searchButton{
+    /* padding: 4px; */
+    height: 100%;
+    width: 50px;
+    font-size: 23px;
+    justify-content: center;
+    vertical-align: middle;
+    /* border: 2px solid red; */
+    border-radius: 6px;
+    border: none;
+    transition: 0.5s;
+    cursor: pointer;
+    background: linear-gradient(to right, #000000, #434343);
+    color: white;
+    }
+
+    .searchButton:hover{
+        /* background: linear-gradient(to right, #969696, #cfcfcf); */
+    }
+
+    .search .input{
+        position: relative;
+        width: 165px;
+        height: 22px;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .search .input input{
+        position: absolute;
+        top: -1px;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-size: 18px;
+        padding: 10px 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .clear{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      right: 15px;
+
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+  }
+  .clear::before{
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 15px;
+      background: grey;
+      transform: rotate(45deg);
+      z-index: 100;
+  }
+  .clear::after{
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 15px;
+      background: grey;
+      transform: rotate(315deg);
+      z-index: 100;
+  }
+
+    .logo{
+        position: fixed;
+        color: white;
+        z-index: 100;
+        font-size: 35px;
+        font-weight: 300;
+        top: 8px;
+    }
+
+  .subnavi{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0, 0.8);
+    height: 25px;
+    z-index: 10;
+    margin: 0%;
+}
+
+.stocks li {
+    list-style: none;
+    display: block;
+    float: left;
+    width: 150px;
+}
+
+.stocks li a{
+    padding: 0px 40px;
+    width: 100%;
+    height: 25px;
+    color: white;
+}
+
+.stocks a{
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+
+  .stocks ul li a:hover {
+  display: block;
+  width: 100%;
+  background-color: rgba(0,0,0, 0.8);
+  color: white;
+  opacity: 1;
+  }
+
+        .search-navi-inputBox {
+            border: none;
+            margin-left: 50px;
+        }
+

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/css/flag-icons.min.css" integrity="sha512-UwbBNAFoECXUPeDhlKR3zzWU3j8ddKIQQsDOsKhXQGdiB5i3IHEXr9kXx82+gaHigbNKbTDp3VY/G6gZqva6ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet">
+    <link href="navbar.css" th:href="@{/css/loginRegister/loginPage.css}" rel="stylesheet">
+    <title>Title</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<body>
+    <div th:replace="fragments/navbar::navbar" replace="fragments/navbar::navbar"></div>
+
+    <main>
+        <div class="row">
+            <div class="column">
+                <div class="introduction">
+                    <div class="introduction1">
+                        <p>See what's happening now<br>in the markets! </p>
+                    </div>
+                    <div class="introduction2">
+                        <p>Create your own blog to share your thoughts and ideas in regards to stocks & cryptos<br>
+                            You can always sign up to join our community</p>
+                    </div>
+                    <div class="introduction3">
+                        <p class="first-p">Innovation  </p>
+                        <p class="second-p">Is Moving</p>
+                        <p class="third-p">At a Fast Pace</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="column">
+                <div class="wrapper">
+                    <!-- <div class="title"><span>Welcome to Central Station!</span></div> -->
+
+                    <form th:action="@{/loginaction}" method="post">
+                        <div class="form-group">
+
+                            <div class="row">
+                                <i class="fas fa-user"></i>
+                                <label for="email_" class="form-control-label"></label>
+<!--                                <input type="text" placeholder="Enter your Email" required>-->
+                                <input type="text" class="form-control" id="email_" name="username" placeholder="Email" required/>
+                            </div>
+
+                            <div class="row">
+                                <i class="fas fa-lock"></i>
+                                <label for="password_" class="form-control-label"></label>
+                                <input type="password" class="form-control" id="password_"  name="password" placeholder="Password" required/>
+<!--                                <input type="password" placeholder="Password" required>-->
+                            </div>
+
+                            <div class="login-button">
+                                <div class="row button">
+<!--                                    <input type="submit" value="Login">-->
+                                    <input type="submit" value="Submit" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+<!--                            <div class="pass"><a href="#">Forgot Password?</a></div>-->
+
+                            <script src="/js/login/register.js" th:href="@{/js/login/register.js}"></script>
+                            <!-- <div class="signup-link">Not a member? <a href="#">Sign-up</a></div> -->
+                            <!-- <div class="alternative">
+                                <p>Alternative Login</p>
+                                <a href="#"><i class="fab fa-google"></i></a>
+                                <a href="#"><i class="fab fa-apple"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-windows"></i></a>
+                            </div>     -->
+                        </div>
+                    </form>
+
+                    <div class="create-button">
+                        <div class="row button">
+                            <!-- <input type="submit" value="Create New Account" id="registerForm"> -->
+                            <a href="#" class="registerButton" id="registerForm">Register</a>
+                        </div>
+                    </div>
+                    <div class="alert-message"> <!--    <h2 th:text="${message}"></h2>-->
+                        <p th:text="${message}"></p>
+                        <p th:text="${failedMessage}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+        <!-- popup/registration form -->
+        <div class="popup">
+            <div class="popup-content">
+                <div>
+                    <div class="signup-intro">
+                        <div class="signup-left">Sign-up</div>
+                        <div class="signup-close"><i class="fas fa-times"></i></div>
+                    </div>
+
+                     <div class="alert alert-info" th:if="${exist}">
+                        <p class="text text-center">
+                            User with this Email already Exist
+                        </p>
+                     </div>
+                    <div id="error"></div>
+                    <form th:action="@{/register}" th:object="${user}" method="post">
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input placeholder="Enter a valid email address" type="text" class="form-control" th:field="*{email}" id="email" />
+                            <div th:if="${#fields.hasErrors('email')}"
+                                 th:errors="*{email}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-control-label">Password</label>
+                            <input type="password" class="form-control" th:field="*{password}" id="password" placeholder="Must contain atleast 4 characters"/>
+                            <div class="text text-danger"
+                                 th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm_password" class="form-control-label">Confirm Password</label>
+                            <input type="password" class="form-control" placeholder="Confirm Password" id="confirm_password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="form-control-label">Name</label> <input
+                                type="text" class="form-control" th:field="*{name}" id="name" placeholder="Type your name or nickname"/>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('name')}"
+                                 th:errors="*{name}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nationality" class="form-control-label">Nationality</label>
+                            <select type="text" class="form-control" th:field="*{nationality}" id="nationality"></select>
+                            <div class="text text-danger" th:if="${#fields.hasErrors('name')}"
+                                 th:errors="*{name}"></div>
+                        </div>
+
+                        <div class="submit-button">
+                            <input type="submit" value="Submit" class="btn btn-primary" onclick="getValue();" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>  <!-- popup ends -->
+
+        <div class="final">
+            <div class="introduction4">
+                <p>Find your Centralised Position</p>
+            </div>
+        </div>
+
+    </main>
+    <script src="js/register/nationality.js"></script>
+    <script src="js/register/pwdConfirmation.js" th:href="@{js/register/pwdConfirmation.js}"></script>
+
+    <script th:src="@{/js/register/emailCheck.js}"></script>
+
+    <script src="/js/login/register.js" th:href="@{/js/login/register.js}"></script>
+
+</body>
+</html>

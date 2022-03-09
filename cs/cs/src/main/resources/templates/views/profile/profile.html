@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/css/flag-icons.min.css"
+          integrity="sha512-UwbBNAFoECXUPeDhlKR3zzWU3j8ddKIQQsDOsKhXQGdiB5i3IHEXr9kXx82+gaHigbNKbTDp3VY/G6gZqva6ZQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Index Page</title>
+
+</head>
+<link href="navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet">
+<link href="/css/profile/profile.css" th:href="@{/css/profile/profile.css}" rel="stylesheet">
+
+<style>
+
+</style>
+
+
+<body>
+
+<div th:replace="fragments/navbar::navbar" replace="fragments/navbar::navbar"></div>
+
+
+<main>
+    <div class="row">
+        <div class="column">
+            <div class="introduction">
+                <div class="left">
+                    <div class="column_left_border" th:each="user:${profile}">
+                        <!-- <h2 class="profile_headline">PROFILE</h2> -->
+                        <div class=".profileImg">
+                            <div class="profileclass">
+                                <p><img class="profiletag" th:src="@{${user.profilePicturePath}}"></p>
+
+<!--                                <div class="history-view-image"><img class="profile-image"-->
+<!--                                                                     src="/img/mainprofilepicture.jpg"></div>-->
+
+                            </div>
+<!--                            <div>-->
+<!--                                <a href="#" th:value="${user.}}"></a>-->
+<!--                            </di>-->
+                        </div>
+
+                        <div class="profileDetails" >
+                            <p class="profileName" th:text="${user.name}">Jaesuk</p>
+                            <p class="profileNationality" th:text="${user.nationality}">South Korea</p>
+                            <p class="profileEmail" th:text="${user.email}">jaesuk95@outlook.com</p>
+                            <p class="profileBio" th:text="${user.bio}">Improve Writing
+                                Before you can begin to determine what the composition of a particular paragraph
+                            </p>
+
+                            <div class="icons">
+                                <!--                    <a href="#" th:href="${user.instagram}"><i class="fab fa-facebook-f"></i></a><br>-->
+                                <a href="#" th:href="${user.twitter}"><i class="fab fa-twitter"></i></a><a
+                                    th:text="${user.tw_tag}">shoot_gorani</a> <br>
+                                <a href="#" th:href="${user.instagram}"><i class="fab fa-instagram"></i></a><a
+                                    th:text="${user.ig_tag}">@justjaes_</a> <br>
+                                <a href="https://telegram.org/"><i class="fab fa-telegram"></i></a><a
+                                    th:text="${user.tg_tag}">IntelliJae</a> <br>
+                            </div>
+
+
+                            <div class="create-button">
+                                <div class="row-button">
+                                    <!-- <input type="submit" value="Create New Account" id="registerForm"> -->
+                                    <button href="#" class="editProfile" onclick="editProfile" id="editProfile">Edit
+                                        Profile</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div> <!-- <div class="column_left_border"> -->
+
+                </div> <!-- <div class="left"> -->
+
+                <!-- ------------------------------------------- POP UP for EDIT PROFILE ---------------------------------------------------- -->
+
+                <!-- popup/registration form -->
+
+                <div class="popup">
+                    <div class="popup-fix">
+                        <div class="popup-content">
+                            <div>
+
+                                <div class="signup-intro">
+                                    <div class="signup-left">Edit Profile</div>
+                                    <div class="signup-close"><i class="fas fa-times"></i></div>
+                                </div>
+
+                                <form th:action="@{/profile}" method="post" th:each="edit:${profile}" enctype="multipart/form-data">
+
+                                    <div class="form-group">
+<!--                                            <label for="defaultImage">Change to Default Image</label>-->
+                                        <input type="file" name="image" accept="image/*" th:value="${edit.profilePicture}">
+                                    </div>
+
+<!--                                    <button class="defaultImg">Change to Default Image</button>                         &lt;!&ndash; default image option &ndash;&gt;-->
+<!--                                    <div>-->
+<!--                                        <label for="defaultImage">Change to Default Image</label>-->
+<!--                                        <input type="checkbox" id="defaultImage">-->
+<!--                                    </div>-->
+
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="email" name="email"
+                                               th:value="${edit.email}" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="form-control-label"><i
+                                                class="fas fa-user-circle"></i> Name</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                               th:value="${edit.name}" placeholder="Change Your Name" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="bio" class="form-control-label"><i
+                                                class="fas fa-address-card"></i> Bio</label>
+                                        <input type="text" class="form-control" id="bio" name="bio"
+                                               th:value="${edit.bio}" placeholder="Write about yourself" />
+                                    </div>
+
+                                    <!-- SNS twitter -->
+                                    <div class="form-group">
+                                        <label for="twitter" class="form-control-label"><i
+                                                class="fab fa-twitter"></i> URL</label>
+                                        <input type="text" class="form-control" id="twitter" name="twitter"
+                                               th:value="${edit.twitter}" placeholder="eg. www.twitter.com/central" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tw_tag" class="form-control-label"><i
+                                                class="fab fa-twitter"></i> Tag</label>
+                                        <input type="text" class="form-control" id="tw_tag" name="twitterTag"
+                                               th:value="${edit.tw_tag}" placeholder="eg. @centralStation" />
+                                    </div>
+
+                                    <!-- SNS instagram -->
+                                    <div class="form-group">
+                                        <label for="instagram" class="form-control-label"><i
+                                                class="fab fa-instagram"></i> URL</label>
+                                        <input type="text" class="form-control" id="instagram" name="instagram"
+                                               th:value="${edit.instagram}"
+                                               placeholder="eg. www.instagram.com/central" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ig_tag" class="form-control-label"><i
+                                                class="fab fa-instagram"></i> Tag</label>
+                                        <input type="text" class="form-control" id="ig_tag" name="instagramTag"
+                                               th:value="${edit.ig_tag}" placeholder="eg. @centralStation" />
+                                    </div>
+
+                                    <!-- SNS Telegram -->
+                                    <div class="form-group">
+                                        <label for="tg_tag" class="form-control-label"><i
+                                                class="fab fa-telegram"></i> Username</label>
+                                        <input type="text" class="form-control" id="tg_tag" name="telegramTag"
+                                               th:value="${edit.tg_tag}" placeholder="eg. centralStation" />
+                                    </div>
+
+                                    <div class="submit-button">
+                                        <input type="submit" value="Update" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div> <!-- popup ends -->
+                </div>
+
+                <!-- ------------------------------------------------------------------------------------------------------------ -->
+            </div>
+        </div>
+        <!-- ------------------------------------------- PPROFILE HISTORY SECTION ---------------------------------------------------- -->
+
+        <div class="column">
+            <div class="wrapper">
+                <div class="historyProfile">
+                    <p>PROFILE</p>
+                </div>
+
+                <div class="historyView"  th:each="feed:${tweets}">
+                    <div>
+                        <div class="history-view">
+                            <div class="history-view-image">
+<!--                                <img class="profile-image" src="/img/mainprofilepicture.jpg">-->
+                                <img class="profile-image" th:src="@{${feed.user.profilePicturePath}}">
+<!--                                "/profile-image/" + email + "/" + profilePicture;-->
+                            </div>
+
+                            <div class="history-view-name" th:text="${feed.user.name}">Jaesuk</div>
+
+
+                            <div class="history-view-email" th:text="${feed.user.email}">jaesuk95@outlook.com</div>
+
+                            <div class="history-view-date" th:text="${feed.date}">2022-01-29 2:39</div>
+                        </div>
+
+                        <div class="history-view-contentImage">
+                            <img class="content-image" src="/img/bfa.png" th:if="${feed.boardImagePath != null}"  th:src="@{${feed.boardImagePath}}">
+                            <!--                            <img class="content-image" th:unless="${}">-->
+                        </div>
+
+                        <div class="history-view-content">
+                            <a href="#" th:href="@{'/profile/{email}/comment/{id}'(email=${feed.user.email}, id=${feed.id})}" th:text="${feed.tweet}">
+                                will be, you must
+                            </a>
+                        </div>
+
+
+                        <div class="user-option">
+                            <div class="feeder">
+                                <a href="#" th:href="@{'/profile/{email}/comment/{id}'(email=${feed.user.email}, id=${feed.id})}" class="reply">
+                                    <i class="fas fa-comment-alt"></i> View Replies (<span th:text="${#lists.size(feed.replies)}">[list Size]</span>)</a>
+<!--                                <div th:text="${#lists.size('listname')}"></div>-->
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="delete-comment">
+                        <form action="#" th:action="@{'/profile/delete/{id}'(id=${feed.id})}" method="post" >
+                            <!--                            <span th:text="${feed.id}"></span>-->
+                            <!--                            <span th:text="${feed.user.email}"></span>-->
+                            <button onclick="confirmDelete();"  type="submit" class="delete-comment-specific">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                        <!--                <td><a th:href="@{/profile/{email}/{id}(email=${feed.user.email}),(id=${feed.id})}" ><i class="fas fa-user-times ml-2"></i></a></td>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ends class="row" -->
+</main>
+
+<script src="/js/profile/profile.js" th:href="@{/js/profile/profile.js}"></script>
+<script src="/js/deleteConfirmation.js" th:href="@{/js/deleteConfirmation.js}"></script>
+</body>
+</html>
